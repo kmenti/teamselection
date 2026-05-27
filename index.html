@@ -376,7 +376,7 @@
 // CONFIG — update SCRIPT_URL after deploying Apps Script
 // ════════════════════════════════════════════════════════════
 const SPREADSHEET_ID = "1jd_0-TluCeh1Vf3LrtOHzA6YfaaoQwWYMIo1NXYOZyk";
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTK1DpvGuhnTVaf4EpTGC194vsntbyLocDsAMCmjFNpyKEGUu8VALlePQrvwhkBs_fKg/exec"; // e.g. https://script.google.com/macros/s/XXXX/exec
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTK1DpvGuhnTVaf4EpTGC194vsntbyLocDsAMCmjFNpyKEGUu8VALlePQrvwhkBs_fKg/exec";
 const ADMIN_CODE = "admin2024";
 
 // ════════════════════════════════════════════════════════════
@@ -545,8 +545,8 @@ function renderCards() {
     card.innerHTML = `
       <div class="card-inner">
         <span class="card-num">${String(i+1).padStart(2,'0')}</span>
-        <span class="card-name" style="color:${mine?'var(--red)':taken?'#B0A898':'var(--dark)}">${team.name}</span>
-        <span class="card-motto" style="color:${mine?'#8B6914':taken?'#C4C0B8':'var(--mid)}">${team.motto}</span>
+        <span class="card-name" style="color:${mine?'var(--red)':taken?'#B0A898':'var(--dark)'}">${team.name}</span>
+        <span class="card-motto" style="color:${mine?'#8B6914':taken?'#C4C0B8':'var(--mid)'}">${team.motto}</span>
         <div class="card-footer">${footerHtml}</div>
       </div>
       ${mine ? '<div class="card-accent"></div>' : ''}
