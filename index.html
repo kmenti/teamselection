@@ -234,7 +234,7 @@ textarea{resize:vertical;line-height:1.6;font-family:monospace}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwul4Gw70hLNc0qJhhJX6iUevYYyZ5_4BXUQm37xIduuoMx6pH0d2_lGCvQfZQN71xWMQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjC9SH3xVVcLYRI8yJHyQDc5Qa2ezaBtwuO2_atWty-mtzy_jK0Vy0IkhrKkmpuqQ8Hg/exec";
 const ADMIN_CODE = "admin2024";
 
 // ── STATE ───────────────────────────────────────────────────────────────────
@@ -317,7 +317,12 @@ function showView(name){
   document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
   document.getElementById('v-'+name).classList.add('active');
   if (name==='landing')  updateLanding();
-  if (name==='selector') renderCards();
+  if (name==='selector'){
+    // Reset success banner whenever entering the arena fresh
+    var sb = document.getElementById('success-banner');
+    if (!myClaim){ sb.classList.add('hidden'); }
+    renderCards();
+  }
   if (name==='admin')    renderAdmin();
 }
 
@@ -338,19 +343,36 @@ function updateUI(){
 function enterArena(){
   var label = document.getElementById('team-select').value;
   if (!label) return;
+  // Reset any previous session state before entering
+  myClaim = null;
   myTeamLabel = label;
-  var existing = Object.entries(claims).find(function(e){ return e[1].claimedBy === label; });
-  if (existing){
-    var name = existing[0], info = existing[1];
-    var team = allTeams.find(function(t){ return t.name === name; });
-    document.getElementById('ret-name').textContent  = name;
-    document.getElementById('ret-motto').textContent = team ? '"' + team.motto + '"' : '';
-    document.getElementById('ret-time').textContent  = 'Claimed at ' + info.claimedAt;
-    showView('returning');
-  } else {
+  // Re-read latest claims from sheet before deciding
+  sheetGet("read").then(function(res){
+    if (res.status === "ok"){
+      var nc = {};
+      res.data.forEach(function(r){ if(r.claimedBy) nc[r.name]={claimedBy:r.claimedBy,claimedAt:r.claimedAt}; });
+      claims = nc;
+    }
+    // Check strictly: does THIS label appear as claimedBy in any entry?
+    var myEntry = null;
+    Object.keys(claims).forEach(function(teamName){
+      if (claims[teamName].claimedBy === label) myEntry = {name: teamName, info: claims[teamName]};
+    });
+    if (myEntry){
+      var team = allTeams.find(function(t){ return t.name === myEntry.name; });
+      document.getElementById('ret-name').textContent  = myEntry.name;
+      document.getElementById('ret-motto').textContent = team ? '"' + team.motto + '"' : '';
+      document.getElementById('ret-time').textContent  = 'Claimed at ' + myEntry.info.claimedAt;
+      showView('returning');
+    } else {
+      document.getElementById('sel-team-label').textContent = label;
+      showView('selector');
+    }
+  }).catch(function(){
+    // If read fails, fall through to selector anyway
     document.getElementById('sel-team-label').textContent = label;
     showView('selector');
-  }
+  });
 }
 
 // ── CARDS ────────────────────────────────────────────────────────────────────
