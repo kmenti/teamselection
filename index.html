@@ -168,7 +168,7 @@ textarea{resize:vertical;line-height:1.6;font-family:monospace}
   <div class="selector-hdr">
     <div class="eyebrow">Team Name Selection</div>
     <h2 class="selector-h2">Choose your team name</h2>
-    <p class="selector-sub">Each name carries a motto. First to click, first to claim.</p>
+    <p class="selector-sub">First to click, first to claim.</p>
   </div>
   <div class="grid" id="cards-grid"></div>
   <div class="footer">
@@ -234,23 +234,23 @@ textarea{resize:vertical;line-height:1.6;font-family:monospace}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjC9SH3xVVcLYRI8yJHyQDc5Qa2ezaBtwuO2_atWty-mtzy_jK0Vy0IkhrKkmpuqQ8Hg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwul4Gw70hLNc0qJhhJX6iUevYYyZ5_4BXUQm37xIduuoMx6pH0d2_lGCvQfZQN71xWMQ/exec";
 const ADMIN_CODE = "admin2024";
 
 // ── STATE ───────────────────────────────────────────────────────────────────
 var allTeams = [
   {name:"Catalysts",          motto:"«Εμείς ξεκινάμε την αλλαγή και κάνουμε τα πράγματα να συμβούν.» | Take Ownership & Initiative"},
-  {name:"Value Makers",       motto:"Deliver Results that Matter"},
-  {name:"Trust Builders",     motto:"Build Trust & Psychological Safety"},
-  {name:"Influencers",        motto:"Communicate & Influence Effectively"},
-  {name:"Connectors",         motto:"Build a Culture of Ownership & Collaboration"},
-  {name:"North Stars",        motto:"Think Strategically & Long-Term"},
-  {name:"Curious Minds",      motto:"Learn, Unlearn & Innovate in a Digital & AI World"},
-  {name:"Simplifiers",        motto:"Drive Simplicity & Clarity"},
-  {name:"Customer Champions", motto:"Lead with Customer Focus"},
-  {name:"Strategists",        motto:"Think & Act with Business Acumen"},
-  {name:"Igniters",           motto:"Develop & Empower Others"},
-  {name:"Avengers",           motto:"Collaborate & Think Collectively"}
+  {name:"Value Makers",       motto:"«Εμείς δημιουργούμε αξία σε κάθε μας κίνηση.» | Deliver Results that Matter"},
+  {name:"Trust Builders",     motto:"«Εμείς ενώνουμε ανθρώπους και χτίζουμε εμπιστοσύνη.» | Build Trust & Psychological Safety"},
+  {name:"Influencers",        motto:"«Εμείς δίνουμε φωνή στις ιδέες και επηρεάζουμε την κατεύθυνση.» | Communicate & Influence Effectively"},
+  {name:"Connectors",         motto:"«Εμείς χτίζουμε ομάδες και κουλτούρα που αντέχουν στον χρόνο.» | Build a Culture of Ownership & Collaboration"},
+  {name:"North Stars",        motto:"«Εμείς βλέπουμε μπροστά και δημιουργούμε το αύριο.» | Think Strategically & Long-Term"},
+  {name:"Curious Minds",      motto:"«Εμείς μαθαίνουμε, εξελισσόμαστε και δεν μένουμε ποτέ στάσιμοι.» | Learn, Unlearn & Innovate in a Digital & AI World"},
+  {name:"Simplifiers",        motto:"«Εμείς κάνουμε τα δύσκολα απλά και ξεκάθαρα.» | Drive Simplicity & Clarity"},
+  {name:"Customer Champions", motto:"«Εμείς βάζουμε τον πελάτη πάντα στο επίκεντρο.» | Lead with Customer Focus"},
+  {name:"Strategists",        motto:"«Εμείς συνδέουμε τη σκέψη με το αποτέλεσμα.» | Think & Act with Business Acumen"},
+  {name:"Igniters",           motto:"«Εμείς ανάβουμε τη σπίθα στους άλλους.» | Develop & Empower Others"},
+  {name:"Avengers",           motto:"«Εμείς δημιουργούμε μαζί και πετυχαίνουμε περισσότερα.» | Collaborate & Think Collectively"}
 ];
 var participants = ["Team 1","Team 2","Team 3","Team 4","Team 5","Team 6","Team 7","Team 8","Team 9","Team 10"];
 var claims      = {};
